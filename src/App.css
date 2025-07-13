@@ -1,27 +1,64 @@
+
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+h1 {
+  width: 100%;
+  text-align: center;
+  flex-basis: 100%;
+  margin: 1px;
+}
+header {
+  width: 100%;
+  text-align: center;
+  flex-basis: 100%;
+}
+main { 
+  width: 100%;
+}
+img.main-images {
+  height: 225px;
+  width: 100%;
+  object-fit: contain;
+  background-color: #212529;
+  object-position: center;
+  transition: opacity 0.5s ease;
+}
+img.main-images:hover {
+  cursor: pointer;
+}
+.App-logo {
+  pointer-events: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@keyframes dance {
+  0%   { transform: translateY(0) rotate(0deg); }
+  20%  { transform: translateY(-5px) rotate(-5deg); }
+  40%  { transform: translateY(0) rotate(5deg); }
+  60%  { transform: translateY(-5px) rotate(-5deg); }
+  80%  { transform: translateY(0) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: dance 1s infinite ease-in-out;
   }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(18px + 2vmin);
+  color: grey;
+  height: 200px;
+  width: 300px;
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .App-link {
@@ -35,4 +72,133 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+footer .wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0bbaf4;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+footer .wave span {
+  content: "";
+  position: absolute;
+  width: 225vh;
+  height: 225vh;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  background: #000;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  font-size: 1em;
+  letter-spacing: 2px;
+  color: #fff;
+}
+footer .wave span:nth-child(1) {
+  border-radius: 45%;
+  background: rgba(20, 20, 20, 1);
+  animation: animate 5s linear infinite;
+}
+
+footer .wave span:nth-child(2) {
+  border-radius: 40%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 10s linear infinite;
+}
+footer .wave span:nth-child(3) {
+  border-radius: 42.5%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 15s linear infinite;
+}
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+section.jumbotron {
+  background-color: #212529;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+h1.loading-text {
+	place-self: center;
+	background: linear-gradient(90deg, #0bbaf4, grey, #0bbaf4) -100%/ 200%;
+	/* being excessively careful with compat, 
+	 * though this has been supported unprefixed and 
+	 * in the shorthand across major browsers for a while */
+	-webkit-background-clip: text;
+	        background-clip: text;
+	/* use color, don't use -webkit-text-fill-color anymore, 
+	 * was meant to solve a problem we haven't had in years */
+	color: transparent;
+	font: 900 clamp(2em, 3vw, 3em) exo, sans-serif;
+	animation: shimmer 2s linear infinite
+}
+
+@keyframes shimmer { to { background-position: 100% } }
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #0bbaf4;
+  --bs-btn-border-color: #0bbaf4;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #0bbaf4;
+  --bs-btn-hover-border-color: #0bbaf4;
+  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0bbaf4;
+  --bs-btn-active-border-color: #0bbaf4;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0bbaf4;
+  --bs-btn-disabled-border-color: #0bbaf4;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #212529;
+  border-color: var(--bs-btn-hover-border-color);
+}
+.lead.text-muted {
+  color: #0bbaf4 !important;
+}
+.vertical-line {
+  width: .5px; /* thickness of the line */
+  height: 150px; /* height of the line */
+  background-color: #212529; /* line color */
+  margin: -25px auto;
+  box-shadow:
+    4px 2px 6px rgba(0, 0, 0, 0.6), -2px 0 4px rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
+  transform: scaleX(0.5); /* visually shrinks width */
+  transform-origin: left;
 }
