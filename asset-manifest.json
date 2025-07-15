@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cklingdesigns-app/static/css/main.b00f91c5.css",
-    "main.js": "/cklingdesigns-app/static/js/main.f725eb6b.js",
+    "main.js": "/cklingdesigns-app/static/js/main.ac133b79.js",
     "static/js/453.d9b1f6da.chunk.js": "/cklingdesigns-app/static/js/453.d9b1f6da.chunk.js",
     "static/media/fa-solid-900.ttf": "/cklingdesigns-app/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/cklingdesigns-app/static/media/fa-brands-400.1815e00441357e01619e.ttf",
@@ -13,11 +13,11 @@
     "static/media/fa-v4compatibility.woff2": "/cklingdesigns-app/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/cklingdesigns-app/index.html",
     "main.b00f91c5.css.map": "/cklingdesigns-app/static/css/main.b00f91c5.css.map",
-    "main.f725eb6b.js.map": "/cklingdesigns-app/static/js/main.f725eb6b.js.map",
+    "main.ac133b79.js.map": "/cklingdesigns-app/static/js/main.ac133b79.js.map",
     "453.d9b1f6da.chunk.js.map": "/cklingdesigns-app/static/js/453.d9b1f6da.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b00f91c5.css",
-    "static/js/main.f725eb6b.js"
+    "static/js/main.ac133b79.js"
   ]
 }
