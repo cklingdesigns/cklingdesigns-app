@@ -10,11 +10,113 @@ h1 {
   text-align: center;
   flex-basis: 100%;
   margin: 1px;
+  color: #1e1e1e;
+}
+h2 {
+  font-size: 1.5rem;
+  font-family: helvetica;
+  font-weight: bold;
+}
+a {
+  color: #3b738a;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+a::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f105"; /* Unicode for angle-right */
+  font-weight: 900; /* Required for solid icons in Free */
+  margin-left: 5px;
+  font-size: .8rem;
+}
+a:hover, a:focus {
+  color: #3b8a41;
+}
+.navbar-brand::after {
+  content: none !important;
 }
 header {
   width: 100%;
   text-align: center;
   flex-basis: 100%;
+}
+.AnimatedCodeContainer {
+  display: flex;
+  justify-content: center;
+  background: #1e1e1e;
+}
+.IconScrollContainer {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  scroll-behavior: smooth;
+  background: #f8f9fa;
+  border-radius: 10px;
+  z-index: 1;
+  position: relative;
+}
+.Icon {
+  font-size: 40px;
+  flex: 0 0 auto;
+  color: #555;
+  transition: transform 0.3s, color 0.3s;
+}
+.IconText {
+  font-size: 30px;
+  flex: 0 0 auto;
+  color: #555;
+  top: -5px;
+  position: relative;
+  transition: transform 0.3s, color 0.3s;
+}
+.Icon:hover, .IconText:hover {
+  transform: scale(1.2);
+  color: #0bbaf4;
+}
+.FortwayneschoolsContainer {
+  position:relative;
+  z-index: 1;
+  background: #9b9d9e;
+  height: auto;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px; /* Optional: space between the divs */
+  padding: 20px;
+  flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
+}
+.FortwayneschoolsContainer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  background-color: #fff; /* Optional for visibility */
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.FortwayneschoolsContainer h2, .FortwayneschoolsContainer p {
+  margin: 0 0 10px 0;
+  text-align: center;
+  color: #333;
+}
+.FortwayneschoolsContainer img {
+  width: 100%;
+  height: 150px;
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.5s ease;
+  border-radius: 10px;
 }
 main { 
   width: 100%;
@@ -33,7 +135,27 @@ img.main-images:hover {
 .App-logo {
   pointer-events: none;
 }
-
+section.jumbotron {
+  background-color: #FFF;
+  padding: 1rem 1rem;
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+h1.loading-text {
+	place-self: center;
+	background: linear-gradient(90deg, #000, #969595, #0bbaf4) -100%/ 200%;
+	/* being excessively careful with compat, 
+	 * though this has been supported unprefixed and 
+	 * in the shorthand across major browsers for a while */
+	-webkit-background-clip: text;
+	        background-clip: text;
+	/* use color, don't use -webkit-text-fill-color anymore, 
+	 * was meant to solve a problem we haven't had in years */
+	color: transparent;
+	font: 900 clamp(2em, 3vw, 3em) exo, sans-serif;
+	animation: shimmer 2s linear infinite
+}
 @keyframes dance {
   0%   { transform: translateY(0) rotate(0deg); }
   20%  { transform: translateY(-5px) rotate(-5deg); }
@@ -52,10 +174,10 @@ img.main-images:hover {
 .App-header {
   align-items: center;
   font-size: calc(18px + 2vmin);
-  color: grey;
+  color: #969595;
   height: 200px;
   width: 300px;
-  border: 2px solid grey;
+  border: 2px solid #969595;
   border-radius: 10px;
   margin: 5px;
   padding: 5px;
@@ -95,7 +217,7 @@ footer {
   align-items: center;
   min-height: 50vh;
 }
-footer .wave {
+footer .Wave {
   position: absolute;
   left: 0;
   width: 100%;
@@ -104,7 +226,7 @@ footer .wave {
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
 }
-footer .wave span {
+footer .Wave span {
   content: "";
   position: absolute;
   width: 225vh;
@@ -114,25 +236,40 @@ footer .wave span {
   transform: translate(-50%, -75%);
   background: #000;
 }
-.content {
+.FooterContent {
   position: relative;
   z-index: 1;
   font-size: 1em;
   letter-spacing: 2px;
   color: #fff;
+  width: 100%
 }
-footer .wave span:nth-child(1) {
+footer .Wave span:nth-child(1) {
   border-radius: 45%;
   background: rgba(20, 20, 20, 1);
   animation: animate 5s linear infinite;
 }
-
-footer .wave span:nth-child(2) {
+.TextRight {
+  text-align: right;
+  padding-right: 20px;
+}
+.TextLeft {
+  text-align: left;
+  padding-left: 20px;
+}
+.TextLeft a::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f106"; /* Unicode for angle-right */
+  font-weight: 900; /* Required for solid icons in Free */
+  margin-left: 5px;
+  font-size: .8rem;
+}
+footer .Wave span:nth-child(2) {
   border-radius: 40%;
   background: rgba(20, 20, 20, 0.5);
   animation: animate 10s linear infinite;
 }
-footer .wave span:nth-child(3) {
+footer .Wave span:nth-child(3) {
   border-radius: 42.5%;
   background: rgba(20, 20, 20, 0.5);
   animation: animate 15s linear infinite;
@@ -145,26 +282,7 @@ footer .wave span:nth-child(3) {
     transform: translate(-50%, -75%) rotate(360deg);
   }
 }
-section.jumbotron {
-  background-color: #212529;
-  padding: 0 1rem;
-  margin-bottom: 2rem;
-  margin-top: 0;
-}
-h1.loading-text {
-	place-self: center;
-	background: linear-gradient(90deg, #0bbaf4, grey, #0bbaf4) -100%/ 200%;
-	/* being excessively careful with compat, 
-	 * though this has been supported unprefixed and 
-	 * in the shorthand across major browsers for a while */
-	-webkit-background-clip: text;
-	        background-clip: text;
-	/* use color, don't use -webkit-text-fill-color anymore, 
-	 * was meant to solve a problem we haven't had in years */
-	color: transparent;
-	font: 900 clamp(2em, 3vw, 3em) exo, sans-serif;
-	animation: shimmer 2s linear infinite
-}
+
 
 @keyframes shimmer { to { background-position: 100% } }
 .btn-primary {
@@ -189,9 +307,9 @@ h1.loading-text {
   border-color: var(--bs-btn-hover-border-color);
 }
 .lead.text-muted {
-  color: #0bbaf4 !important;
+  color: #212529 !important;
 }
-.vertical-line {
+.VerticalLine {
   width: .5px; /* thickness of the line */
   height: 150px; /* height of the line */
   background-color: #212529; /* line color */
