@@ -1,7 +1,7 @@
 //import react from 'react'
+import { useInView } from 'react-intersection-observer';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import { Navbar, Nav, Container } from 'react-bootstrap';
@@ -189,7 +189,15 @@ const CustomNodeFlow = () => {
 };
 
 function App() {
+  const LazyImage = ({ src, alt, ...props }) => {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
+    return (
+      <div ref={ref} style={{ minHeight: '200px' }}>
+        {inView && <img src={src} alt={alt} {...props} />}
+      </div>
+    );
+  };
   const [showModal, setShowModal] = useState(false);
 
   const handleShow = (e) => {
@@ -222,32 +230,39 @@ function App() {
         <div className="container">
           <h1 className="loading-text">Kling's Creative Portfolio</h1>
           <p className="lead text-muted">A Fusion of Art, Design & Innovation</p>
+          <hr></hr>
+          <div className="row">
+            <p className="col-sm-6 kling-cartoon"><img width="300" src={process.env.PUBLIC_URL + "/images/kling-cartoon.png"} alt="Corey Kling - Full Stack Developer" /></p>
+            <p class="col-sm-6 intro-text">
+              Results-driven Full Stack Developer with a strong foundation in web development, SEO, social media management, and multimedia integration. Adept at designing and deploying custom, responsive websites with afocus on accessibility and performance. Possesses a deep understanding of modern programming languages, database design, and digital marketing strategies. Proven ability to translate complex requirements into functional, user-friendly solutions while aligning with organizational goals.
+            </p>
+          </div>
         </div>
+
       </section>
       <ParallaxProvider>
       <div className="AnimatedCodeContainer">
-        <Parallax speed={-10}>
           <AnimatedCode />
-        </Parallax>
       </div>
       <div className="IconScrollContainer">
-        <ImageScroll />
+          <ImageScroll />
       </div>
+
       <div className="FortwayneschoolsContainer">
         <div>
           <h2>Fort Wayne Schools</h2>
           <p><a href="https://www.fortwayneschools.org/" target="_blank">Current Website</a></p>
-          <img src={process.env.PUBLIC_URL + "/images/coding/fortwayneschools.jpg"} alt="2022 Fortwayneschools.org" />
+          <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/fortwayneschools.jpg"} loading="lazy" alt="2022 Fortwayneschools.org" />
         </div>
         <div>
           <h2>2019 Fortwayneschools.org</h2>
           <p><a href="https://web.archive.org/web/20190630114014/https://www.fortwayneschools.org/" target="_blank">2019 Wayback Machine</a></p>
-          <img src={process.env.PUBLIC_URL + "/images/coding/2019-fortwayneschools.jpg"} alt="2019 Fortwayneschools.org" />
+          <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/2019-fortwayneschools.jpg"} alt="2019 Fortwayneschools.org" />
         </div>
         <div>
           <h2>2017 Fortwayneschools.org</h2>
           <p><a href="https://web.archive.org/web/20170625210912/https://www.fortwayneschools.org/" target="_blank">2017 Wayback Machine</a></p>
-          <img src={process.env.PUBLIC_URL + "/images/coding/2017-fortwayneschools.jpg"} alt="2017 Fortwayneschools.org" />
+          <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/2017-fortwayneschools.jpg"} alt="2017 Fortwayneschools.org" />
         </div>
         <div>
           <h2>2016 Fortwayneschools.org</h2>
@@ -357,14 +372,27 @@ function App() {
         <span></span>
       </div>
       <div className="FooterContent row">
+
         <div className="col-sm-6 TextRight">
-          <img width="400" alt="Cklingdesigns Logo" src={process.env.PUBLIC_URL + '/images/ckling-logo.png'} data-holder-rendered="true" />
+          <LazyImage  alt="Cklingdesigns Logo" src={process.env.PUBLIC_URL + '/images/ckling-logo.png'} data-holder-rendered="true" />
         </div>
         <div className="col-sm-6 TextLeft">
-          <p className="float-right">
+          <div className="col-sm-12 FooterLinks">
+            <p>
+              <a href="https://x.com/CoreyKling95639" target="_blank"><i className="fab fa-twitter"></i> Twitter</a>
+              <a href="https://www.facebook.com/corey.kling.9" target="_blank"><i className="fab fa-facebook"></i> Facebook</a>
+              <a href="https://www.instagram.com/klincl01/" target="_blank"><i className="fab fa-instagram"></i> Instagram</a>
+            </p>
+            <p>
+              <a href="https://www.linkedin.com/in/corey-kling-97468546/" target="_blank"><i className="fab fa-linkedin"></i> Linkedin</a>
+              <a href="https://github.com/cklingdesigns" target="_blank"><i className="fab fa-github"></i> GitHub</a>
+              <a href="#" onClick={handleShow}><i className="fas fa-envelope"></i> Contact</a>
+            </p>
+          </div>
+          <p className="Copyright">Copyright © 2025 Cklingdesigns</p>
+          <p className="BackToTop">
             <a href="#">Back to top</a>
           </p>
-          <p>Copyright © 2025 Cklingdesigns</p>
         </div>
       </div>
     </footer>

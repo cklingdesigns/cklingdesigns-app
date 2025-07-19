@@ -1,5 +1,15 @@
 import React, { useState, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 
+const LazyImage = ({ src, alt, ...props }) => {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  return (
+    <div ref={ref} style={{ minHeight: '200px' }}>
+      {inView && <img src={src} alt={alt} {...props} />}
+    </div>
+  );
+};
 const ImageSlideshowHobbies = () => {
   const images = [
     process.env.PUBLIC_URL + '/images/hobbies/alien-ceiling.jpg',
@@ -76,7 +86,7 @@ const ImageSlideshowFunDesigns = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage  className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
@@ -90,7 +100,6 @@ const ImageSlideshowCoding = () => {
   const images = [
     process.env.PUBLIC_URL + '/images/coding/fortwayneschools.jpg',
     process.env.PUBLIC_URL + '/images/coding/myfwcs.jpg',
-    process.env.PUBLIC_URL + '/images/coding/python-cheatsheet.jpg',
     process.env.PUBLIC_URL + '/images/coding/whitehenn-2011.jpg',
   ];
 
@@ -119,7 +128,7 @@ const ImageSlideshowCoding = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
@@ -166,7 +175,7 @@ const ImageSlideshowWildSide = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
@@ -207,7 +216,7 @@ const ImageSlideshowHolidayFun = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
@@ -248,7 +257,7 @@ const ImageSlideshowSilly = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
@@ -289,7 +298,7 @@ const ImageSlideshowMarketing = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
@@ -309,6 +318,9 @@ const ImageSlideshowWoodworking = () => {
     process.env.PUBLIC_URL + '/images/woodworking/mailbox2.jpg',
     process.env.PUBLIC_URL + '/images/woodworking/bunk-beds3.jpg',
     process.env.PUBLIC_URL + '/images/woodworking/activity-box1.jpg',
+    process.env.PUBLIC_URL + '/images/woodworking/activity-box2.jpg',
+    process.env.PUBLIC_URL + '/images/woodworking/activity-box3.jpg',
+    process.env.PUBLIC_URL + '/images/woodworking/activity-box4.jpg',
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -336,7 +348,7 @@ const ImageSlideshowWoodworking = () => {
           objectPosition: 'center',
       }}
     >
-      <img className="card-img-top main-images"
+      <LazyImage className="card-img-top main-images"
         src={images[currentIndex]}
         alt="Slideshow"
       />
