@@ -32,7 +32,7 @@ const BucketListApp: React.FC = () => {
 useEffect(() => {
   const fetchBucketList = async () => {
     try {
-      const response = await fetch("/bucketlist.json", {
+      const response = await fetch(`${process.env.PUBLIC_URL}/bucketlist.json?${Date.now()}`, {
         headers: {
           "Accept": "application/json",
         },
