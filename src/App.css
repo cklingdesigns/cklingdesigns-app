@@ -42,6 +42,14 @@ a:hover, a:focus {
 .navbar-brand::after, .NoArrow::after {
   content: none !important;
 }
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.loaded {
+  opacity: 1;
+}
 header {
   width: 100%;
   text-align: center;

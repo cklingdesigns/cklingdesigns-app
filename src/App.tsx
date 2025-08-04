@@ -7,6 +7,7 @@ import './App.css?ver=1.0.0';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import React, { useState, useEffect, useCallback } from 'react';
 import ContactModal from './Components/ContactModal';
+import { Parallax } from 'react-scroll-parallax';
 import {
   ImageSlideshowHobbies,
   ImageSlideshowFunDesigns,
@@ -29,7 +30,6 @@ import '@xyflow/react/dist/style.css';
 import ColorSelectorNode from './Components/ColorSelectorNode';
 import AnimatedCode from './Components/AnimatedCode';
 import { ParallaxProvider } from 'react-scroll-parallax';
-//import { Parallax } from 'react-scroll-parallax';
 import BucketListApp from './Components/BucketListApp';
 
 const icons = [
@@ -85,10 +85,11 @@ function App() {
   }
   const LazyImage: React.FC<LazyImageProps> = ({ src, alt, ...props }) => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+    const [loaded, setLoaded] = useState(false);
 
     return (
-      <div ref={ref} style={{ minHeight: '200px' }}>
-        {inView && <img src={src} alt={alt} {...props} />}
+      <div ref={ref} className={`fade-in ${inView && loaded ? 'loaded' : ''}`}>
+        {inView && <img src={src} alt={alt} onLoad={() => setLoaded(true)} {...props} />}
       </div>
     );
   };
@@ -130,31 +131,34 @@ return (
 
       </section>
       <ParallaxProvider>
-      <div className="AnimatedCodeContainer">
-          <AnimatedCode />
-      </div>
-      <div className="FortwayneschoolsContainer">
-        <div>
-          <h2>Fort Wayne Schools</h2>
-          <p><a href="https://www.fortwayneschools.org/" target="_blank">Current Website</a></p>
-          <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/fortwayneschools.jpg"} loading="lazy" alt="2022 Fortwayneschools.org" />
+        <Parallax translateY={[-20, 20]}>
+          <div className="AnimatedCodeContainer">
+              <AnimatedCode />
+          </div>
+        </Parallax>
+        <div className="FortwayneschoolsContainer">
+          <div>
+            <h2>Fort Wayne Schools</h2>
+            <p><a href="https://www.fortwayneschools.org/" target="_blank">Current Website</a></p>
+            <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/fortwayneschools.jpg"} loading="lazy" alt="2022 Fortwayneschools.org" />
+          </div>
+          <div>
+            <h2>2019 Fortwayneschools.org</h2>
+            <p><a href="https://web.archive.org/web/20190630114014/https://www.fortwayneschools.org/" target="_blank">2019 Wayback Machine</a></p>
+            <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/2019-fortwayneschools.jpg"} alt="2019 Fortwayneschools.org" />
+          </div>
+          <div>
+            <h2>2017 Fortwayneschools.org</h2>
+            <p><a href="https://web.archive.org/web/20170625210912/https://www.fortwayneschools.org/" target="_blank">2017 Wayback Machine</a></p>
+            <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/2017-fortwayneschools.jpg"} alt="2017 Fortwayneschools.org" />
+          </div>
+          <div>
+            <h2>2016 Fortwayneschools.org</h2>
+            <p><a href="https://web.archive.org/web/20160503211228/http://www.fortwayneschools.org/" target="_blank">2016 Wayback Machine</a></p>
+            <LazyImage src={process.env.PUBLIC_URL + "/images/coding/2016-fortwayneschools.jpg"} alt="2016 Fortwayneschools.org" />
+          </div>
         </div>
-        <div>
-          <h2>2019 Fortwayneschools.org</h2>
-          <p><a href="https://web.archive.org/web/20190630114014/https://www.fortwayneschools.org/" target="_blank">2019 Wayback Machine</a></p>
-          <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/2019-fortwayneschools.jpg"} alt="2019 Fortwayneschools.org" />
-        </div>
-        <div>
-          <h2>2017 Fortwayneschools.org</h2>
-          <p><a href="https://web.archive.org/web/20170625210912/https://www.fortwayneschools.org/" target="_blank">2017 Wayback Machine</a></p>
-          <LazyImage  src={process.env.PUBLIC_URL + "/images/coding/2017-fortwayneschools.jpg"} alt="2017 Fortwayneschools.org" />
-        </div>
-        <div>
-          <h2>2016 Fortwayneschools.org</h2>
-          <p><a href="https://web.archive.org/web/20160503211228/http://www.fortwayneschools.org/" target="_blank">2016 Wayback Machine</a></p>
-          <img src={process.env.PUBLIC_URL + "/images/coding/2016-fortwayneschools.jpg"} alt="2016 Fortwayneschools.org" />
-        </div>
-      </div>
+      <Parallax translateY={[-20, 20]}>
       <div className="album py-5 bg-light">
         <div className="container">
           <div className="row text-center">
@@ -246,6 +250,7 @@ return (
           </div>
         </div>
       </div>
+      </Parallax>
       <div><BucketListApp /></div>
     </ParallaxProvider>
     </main>

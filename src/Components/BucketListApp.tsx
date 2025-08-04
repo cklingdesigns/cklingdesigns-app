@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useInView } from 'react-intersection-observer';
 
 // --- Type Definitions ---
 interface BucketListItem {
@@ -14,6 +15,20 @@ const BucketListApp: React.FC = () => {
   const [bucketList, setBucketList] = useState<BucketListItem[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+    src: string;
+    alt: string;
+  }
+  const LazyImage: React.FC<LazyImageProps> = ({ src, alt, ...props }) => {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+    const [loaded, setLoaded] = useState(false);
+
+    return (
+      <div ref={ref} className={`fade-in ${inView && loaded ? 'loaded' : ''}`}>
+        {inView && <img src={src} alt={alt} onLoad={() => setLoaded(true)} {...props} />}
+      </div>
+    );
+  };
 useEffect(() => {
   const fetchBucketList = async () => {
     try {
@@ -48,7 +63,7 @@ useEffect(() => {
               .map((item) => (
               <li key={item.id}>
                 {item.name} {item.completed ? <i className="fas fa-square-check"></i> : <i className="fas fa-square"></i>}
-                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><img src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
+                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><LazyImage src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
               </li>
             ))}
           </ul>
@@ -63,7 +78,7 @@ useEffect(() => {
               .map((item) => (
               <li key={item.id}>
                 {item.name} {item.completed ? <i className="fas fa-square-check"></i> : <i className="fas fa-square"></i>}
-                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><img src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
+                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><LazyImage src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
               </li>
             ))}
           </ul>
@@ -78,7 +93,7 @@ useEffect(() => {
               .map((item) => (
               <li key={item.id}>
                 {item.name} {item.completed ? <i className="fas fa-square-check"></i> : <i className="fas fa-square"></i>}
-                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><img src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
+                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><LazyImage src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
               </li>
             ))}
           </ul>
@@ -93,7 +108,7 @@ useEffect(() => {
               .map((item) => (
               <li key={item.id}>
                 {item.name} {item.completed ? <i className="fas fa-square-check"></i> : <i className="fas fa-square"></i>}
-                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><img src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
+                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><LazyImage src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
               </li>
             ))}
           </ul>
@@ -108,7 +123,7 @@ useEffect(() => {
               .map((item) => (
               <li key={item.id}>
                 {item.name} {item.completed ? <i className="fas fa-square-check"></i> : <i className="fas fa-square"></i>}
-                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><img src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
+                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><LazyImage src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
               </li>
             ))}
           </ul>
@@ -123,7 +138,7 @@ useEffect(() => {
               .map((item) => (
               <li key={item.id}>
                 {item.name} {item.completed ? <i className="fas fa-square-check"></i> : <i className="fas fa-square"></i>}
-                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><img src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
+                {item.url && <a href={process.env.PUBLIC_URL + item.url} target="_blank" className="NoArrow"><LazyImage src={process.env.PUBLIC_URL + item.url} alt={item.name} className="lazy-image" /></a>}
               </li>
             ))}
           </ul>
