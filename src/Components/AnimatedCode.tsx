@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const codeSegments = [
+interface CodeSegment {
+  text: string;
+  color: string;
+}
+
+const codeSegments: CodeSegment[] = [
   { text: "if", color: "#569CD6" },
   { text: " (", color: "#D4D4D4" },
   { text: "$coffee", color: "#9CDCFE" },
@@ -25,7 +30,7 @@ const codeSegments = [
   { text: "\n}", color: "#D4D4D4" }
 ];
 
-const codeSegments2 = [
+const codeSegments2: CodeSegment[] = [
   { text: "function", color: "#569CD6" },
   { text: " repeat", color: "#f8cc05ff" },
   { text: "()", color: "#effda1ff" },
@@ -41,9 +46,12 @@ const codeSegments2 = [
   { text: "\n}} ();", color: "#effda1ff" }
 ];
 
-// Reusable component for animated typing
-const CodeTyper = ({ segments }) => {
-  const [displayed, setDisplayed] = useState([]);
+interface CodeTyperProps {
+  segments: CodeSegment[];
+}
+
+const CodeTyper: React.FC<CodeTyperProps> = ({ segments }) => {
+  const [displayed, setDisplayed] = useState<CodeSegment[]>([]);
 
   useEffect(() => {
     let index = 0;
@@ -69,7 +77,7 @@ const CodeTyper = ({ segments }) => {
           if (last && last.color === currentColor) {
             return [
               ...prev.slice(0, -1),
-              { text: last.text + nextChar, color: currentColor },
+              { text: last.text + nextChar, color: currentColor }
             ];
           } else {
             return [...prev, { text: nextChar, color: currentColor }];
@@ -96,7 +104,7 @@ const CodeTyper = ({ segments }) => {
         whiteSpace: "pre-wrap",
         textAlign: "left",
         flex: 1,
-        minWidth: "300px",
+        minWidth: "300px"
       }}
     >
       {displayed.map((seg, i) => (
@@ -108,7 +116,7 @@ const CodeTyper = ({ segments }) => {
   );
 };
 
-const AnimatedCode = () => {
+const AnimatedCode: React.FC = () => {
   return (
     <div
       style={{
@@ -118,7 +126,7 @@ const AnimatedCode = () => {
         flexWrap: "wrap", // responsive fallback
         alignItems: "flex-start",
         justifyContent: "center",
-        width: "100%",
+        width: "100%"
       }}
     >
       <CodeTyper segments={codeSegments} />

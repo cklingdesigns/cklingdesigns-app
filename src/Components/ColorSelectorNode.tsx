@@ -1,7 +1,17 @@
-import React, { memo } from 'react';
+import React, { memo, ChangeEvent } from 'react';
 import { Handle, Position } from '@xyflow/react';
- 
-export default memo(({ data, isConnectable }) => {
+
+interface ColorSelectorNodeData {
+  color: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface ColorSelectorNodeProps {
+  data: ColorSelectorNodeData;
+  isConnectable: boolean;
+}
+
+const ColorSelectorNode: React.FC<ColorSelectorNodeProps> = ({ data, isConnectable }) => {
   return (
     <>
       <Handle
@@ -26,4 +36,6 @@ export default memo(({ data, isConnectable }) => {
       />
     </>
   );
-});
+};
+
+export default memo(ColorSelectorNode);

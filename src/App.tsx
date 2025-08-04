@@ -3,10 +3,10 @@ import { useInView } from 'react-intersection-observer';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import './App.css';
+import './App.css?ver=1.0.0';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import React, { useState, useEffect, useCallback } from 'react';
-import ContactModal from './ContactModal';
+import ContactModal from './Components/ContactModal';
 import {
   ImageSlideshowHobbies,
   ImageSlideshowFunDesigns,
@@ -16,7 +16,7 @@ import {
   ImageSlideshowSilly,
   ImageSlideshowWoodworking,
   ImageSlideshowHolidayFun,
-} from './ImageSlideshowOnHover';
+} from './Components/ImageSlideshowOnHover';
 import {
   ReactFlow,
   useNodesState,
@@ -26,10 +26,11 @@ import {
   Controls,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import ColorSelectorNode from './ColorSelectorNode';
-import AnimatedCode from './AnimatedCode';
+import ColorSelectorNode from './Components/ColorSelectorNode';
+import AnimatedCode from './Components/AnimatedCode';
 import { ParallaxProvider } from 'react-scroll-parallax';
-import { Parallax } from 'react-scroll-parallax';
+//import { Parallax } from 'react-scroll-parallax';
+import BucketListApp from './Components/BucketListApp';
 
 const icons = [
   { type: "icon", className: "fa-brands fa-php" },
@@ -49,8 +50,8 @@ const icons = [
   { type: "icon", className: "fa-brands fa-laravel" },
   { type: "icon", className: "fa-solid fa-database" }
 ];
-export function ImageScroll() {
-  return (
+
+/*return (
     <div className="IconScrollContainer">
       {icons.map((item, index) =>
         item.type === "icon" ? (
@@ -63,133 +64,26 @@ export function ImageScroll() {
       )}
     </div>
   );
-}
+}*/
 const initBgColor = '#c9f1dd';
-
 const snapGrid = [20, 20];
 const nodeTypes = {
   selectorNode: ColorSelectorNode,
 };
  
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
- 
-const CustomNodeFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [bgColor, setBgColor] = useState(initBgColor);
- 
-  useEffect(() => {
-    const onChange = (event) => {
-      setNodes((nds) =>
-        nds.map((node) => {
-          if (node.id !== '2') {
-            return node;
-          }
- 
-          const color = event.target.value;
- 
-          setBgColor(color);
- 
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              color,
-            },
-          };
-        }),
-      );
-    };
- 
-    setNodes([
-      {
-        id: '1',
-        type: 'input',
-        data: { label: 'An input node' },
-        position: { x: 0, y: 50 },
-        sourcePosition: 'right',
-      },
-      {
-        id: '2',
-        type: 'selectorNode',
-        data: { onChange: onChange, color: initBgColor },
-        position: { x: 300, y: 50 },
-      },
-      {
-        id: '3',
-        type: 'output',
-        data: { label: 'Output A' },
-        position: { x: 650, y: 25 },
-        targetPosition: 'left',
-      },
-      {
-        id: '4',
-        type: 'output',
-        data: { label: 'Output B' },
-        position: { x: 650, y: 100 },
-        targetPosition: 'left',
-      },
-    ]);
- 
-    setEdges([
-      {
-        id: 'e1-2',
-        source: '1',
-        target: '2',
-        animated: true,
-      },
-      {
-        id: 'e2a-3',
-        source: '2',
-        target: '3',
-        animated: true,
-      },
-      {
-        id: 'e2b-4',
-        source: '2',
-        target: '4',
-        animated: true,
-      },
-    ]);
-  }, []);
- 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
-    [],
-  );
-  return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      style={{ background: bgColor }}
-      nodeTypes={nodeTypes}
-      snapToGrid={true}
-      snapGrid={snapGrid}
-      defaultViewport={defaultViewport}
-      fitView
-      attributionPosition="bottom-left"
-    >
-      <MiniMap
-        nodeStrokeColor={(n) => {
-          if (n.type === 'input') return '#0041d0';
-          if (n.type === 'selectorNode') return bgColor;
-          if (n.type === 'output') return '#ff0072';
-        }}
-        nodeColor={(n) => {
-          if (n.type === 'selectorNode') return bgColor;
-          return '#fff';
-        }}
-      />
-      <Controls />
-    </ReactFlow>
-  );
-};
 
 function App() {
-  const LazyImage = ({ src, alt, ...props }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleShow = <T extends HTMLElement>(e: React.MouseEvent<T>) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+  interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+    src: string;
+    alt: string;
+  }
+  const LazyImage: React.FC<LazyImageProps> = ({ src, alt, ...props }) => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
     return (
@@ -198,14 +92,9 @@ function App() {
       </div>
     );
   };
-  const [showModal, setShowModal] = useState(false);
 
-  const handleShow = (e) => {
-    e.preventDefault();
-    setShowModal(true);
-  };
 
-  return (
+return (
     <div className="App">
     <header>
     <Navbar bg="dark" expand="lg" variant="dark">
@@ -214,11 +103,11 @@ function App() {
         <Navbar.Toggle aria-controls="navbarHeader" />
         <Navbar.Collapse id="navbarHeader">
           <Nav className="me-auto">
-            <Nav.Link href="https://x.com/CoreyKling95639" target="_blank"><i className="fab fa-twitter"></i> Twitter</Nav.Link>
-            <Nav.Link href="https://www.facebook.com/corey.kling.9" target="_blank"><i className="fab fa-facebook"></i> Facebook</Nav.Link>
-            <Nav.Link href="https://www.instagram.com/klincl01/" target="_blank"><i className="fab fa-instagram"></i> Instagram</Nav.Link>
-            <Nav.Link href="https://www.linkedin.com/in/corey-kling-97468546/" target="_blank"><i className="fab fa-linkedin"></i> Linkedin</Nav.Link>
-            <Nav.Link href="https://github.com/cklingdesigns" target="_blank"><i className="fab fa-github"></i> GitHub</Nav.Link>
+            <Nav.Link href="https://x.com/CoreyKling95639" target="_blank" rel="noreferrer"><i className="fab fa-twitter"></i> Twitter</Nav.Link>
+            <Nav.Link href="https://www.facebook.com/corey.kling.9" target="_blank" rel="noreferrer"><i className="fab fa-facebook"></i> Facebook</Nav.Link>
+            <Nav.Link href="https://www.instagram.com/klincl01/" target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i> Instagram</Nav.Link>
+            <Nav.Link href="https://www.linkedin.com/in/corey-kling-97468546/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i> Linkedin</Nav.Link>
+            <Nav.Link href="https://github.com/cklingdesigns" target="_blank" rel="noreferrer"><i className="fab fa-github"></i> GitHub</Nav.Link>
             <Nav.Link href="#" onClick={handleShow}><i className="fas fa-envelope"></i> Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -233,7 +122,7 @@ function App() {
           <hr></hr>
           <div className="row">
             <p className="col-sm-6 kling-cartoon"><img width="300" src={process.env.PUBLIC_URL + "/images/kling-cartoon.png"} alt="Corey Kling - Full Stack Developer" /></p>
-            <p class="col-sm-6 intro-text">
+            <p className="col-sm-6 intro-text">
               Results-driven Full Stack Developer with a strong foundation in web development, SEO, social media management, and multimedia integration. Adept at designing and deploying custom, responsive websites with afocus on accessibility and performance. Possesses a deep understanding of modern programming languages, database design, and digital marketing strategies. Proven ability to translate complex requirements into functional, user-friendly solutions while aligning with organizational goals.
             </p>
           </div>
@@ -244,10 +133,6 @@ function App() {
       <div className="AnimatedCodeContainer">
           <AnimatedCode />
       </div>
-      <div className="IconScrollContainer">
-          <ImageScroll />
-      </div>
-
       <div className="FortwayneschoolsContainer">
         <div>
           <h2>Fort Wayne Schools</h2>
@@ -294,7 +179,6 @@ function App() {
                 <ImageSlideshowMarketing />
                 <div className="card-body">
                   <p className="card-text">Marketing/Design</p>
-
                 </div>
               </div>
             </div>
@@ -320,7 +204,6 @@ function App() {
                 </div>
               </div>
             </div>
-
             <div className="col-md-4">
               <div className="card mb-4 box-shadow">
                 <ImageSlideshowFunDesigns />
@@ -363,6 +246,7 @@ function App() {
           </div>
         </div>
       </div>
+      <div><BucketListApp /></div>
     </ParallaxProvider>
     </main>
     <footer className="text-muted">
@@ -374,7 +258,7 @@ function App() {
       <div className="FooterContent row">
 
         <div className="col-sm-6 TextRight">
-          <LazyImage  alt="Cklingdesigns Logo" src={process.env.PUBLIC_URL + '/images/ckling-logo.png'} data-holder-rendered="true" />
+          <a href={process.env.PUBLIC_URL + '/images/ckling-logo.png'} className="NoArrow"><LazyImage alt="Cklingdesigns Logo" src={process.env.PUBLIC_URL + '/images/ckling-logo.png'} data-holder-rendered="true" /></a>
         </div>
         <div className="col-sm-6 TextLeft">
           <div className="col-sm-12 FooterLinks">
@@ -396,7 +280,6 @@ function App() {
         </div>
       </div>
     </footer>
-    <ContactModal show={showModal} handleClose={() => setShowModal(false)} />
     </div>
 
   );

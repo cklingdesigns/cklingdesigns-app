@@ -16,6 +16,11 @@ h2 {
   font-family: helvetica;
   font-weight: bold;
 }
+h3 {
+  font-size: 1.2rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-bottom: 2px solid #6b6b6b;
+}
 a {
   color: #3b738a;
   text-decoration: none;
@@ -34,7 +39,7 @@ a::after {
 a:hover, a:focus {
   color: #3b8a41;
 }
-.navbar-brand::after {
+.navbar-brand::after, .NoArrow::after {
   content: none !important;
 }
 header {
@@ -211,6 +216,65 @@ h1.loading-text {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+.BucketListApp {
+  display: flex;
+  flex-direction: column;
+  padding: 20px; 
+}
+.BucketListApp div div.card {
+  background: #9b9d9e;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 32.2%;
+  margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 767.98px) {
+  .BucketListApp div div.card {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+@media (min-width: 767.99px) and (max-width: 1200px) {
+  .BucketListApp div div.card {
+    width: 47.9%;
+    margin: 10px;
+  }
+}
+@media (min-width: 1201px) {
+  .BucketListApp div div.card {
+    width: 32%;
+    margin: 10px;
+  }
+}
+.BucketListApp ul {
+  max-height: 20rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+.BucketListApp li {
+  list-style: none;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: left;
+}
+.BucketListApp li i {
+  padding: 0 5px;
+  color: green;
+}
+.BucketListApp img {
+  height: 20px;
+  object-fit: cover;
+  width: 20px;
+  border-radius: 3px;
+}
+.BucketListApp li i.fa-square {
+  padding: 0 5px;
+  color: grey;
 }
 footer {
   position: relative;
