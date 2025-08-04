@@ -48,23 +48,25 @@ const icons = [
   { type: "icon", className: "fa-brands fa-microsoft" },
   { type: "icon", className: "fa-brands fa-node-js" },
   { type: "icon", className: "fa-brands fa-laravel" },
-  { type: "icon", className: "fa-solid fa-database" }
-];
+  { type: "icon", className: "fa-solid fa-database" },
+  { type: "icon", className: "fa-brands fa-wordpress" },
+  { type: "icon", className: "fa-brands fa-font-awesome" },
+  { type: "icon", className: "fa-brands fa-google" },
+  { type: "icon", className: "fa-brands fa-node" },
+  { type: "text", label: "Adobe" },
+  { type: "icon", className: "fa-brands fa-weebly" },
+  { type: "icon", className: "fa-brands fa-npm" },
+  { type: "text", label: "365" }
 
-/*return (
-    <div className="IconScrollContainer">
-      {icons.map((item, index) =>
-        item.type === "icon" ? (
-          <i key={index} className={`Icon ${item.className}`}></i>
-        ) : (
-          <span key={index} className="IconText">
-            {item.label}
-          </span>
-        )
-      )}
-    </div>
-  );
-}*/
+];
+const repeatIcons = (iconList: typeof icons, minCount = 40) => {
+  const result = [];
+  while (result.length < minCount) {
+    result.push(...iconList);
+  }
+  return result.slice(0, minCount); // exact count
+};
+
 const initBgColor = '#c9f1dd';
 const snapGrid = [20, 20];
 const nodeTypes = {
@@ -75,7 +77,7 @@ const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const handleShow = <T extends HTMLElement>(e: React.MouseEvent<T>) => {
+  const handleShow = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setShowModal(true);
   };
@@ -93,7 +95,6 @@ function App() {
       </div>
     );
   };
-
 
 return (
     <div className="App">
@@ -115,17 +116,29 @@ return (
       </Container>
     </Navbar>
     </header>
+    <ContactModal show={showModal} handleClose={() => setShowModal(false)} />
     <main role="main">
       <section className="jumbotron text-center">
-        <div className="container">
-          <h1 className="loading-text">Kling's Creative Portfolio</h1>
-          <p className="lead text-muted">A Fusion of Art, Design & Innovation</p>
-          <hr></hr>
-          <div className="row">
-            <p className="col-sm-6 kling-cartoon"><img width="300" src={process.env.PUBLIC_URL + "/images/kling-cartoon.png"} alt="Corey Kling - Full Stack Developer" /></p>
-            <p className="col-sm-6 intro-text">
-              Results-driven Full Stack Developer with a strong foundation in web development, SEO, social media management, and multimedia integration. Adept at designing and deploying custom, responsive websites with afocus on accessibility and performance. Possesses a deep understanding of modern programming languages, database design, and digital marketing strategies. Proven ability to translate complex requirements into functional, user-friendly solutions while aligning with organizational goals.
-            </p>
+        <h1 className="loading-text">Kling's Creative Portfolio</h1>
+        <p className="lead text-muted">A Fusion of Art, Design & Innovation</p>
+        <hr></hr>
+        <div className="row">
+          <p className="col-sm-6 kling-cartoon"><img width="300" src={process.env.PUBLIC_URL + "/images/kling-cartoon.png"} alt="Corey Kling - Full Stack Developer" /></p>
+          <p className="col-sm-6 intro-text">
+            Results-driven Full Stack Developer with a strong foundation in web development, SEO, social media management, and multimedia integration. Adept at designing and deploying custom, responsive websites with afocus on accessibility and performance. Possesses a deep understanding of modern programming languages, database design, and digital marketing strategies. Proven ability to translate complex requirements into functional, user-friendly solutions while aligning with organizational goals.
+          </p>
+        </div>
+        <div className="IconScrollWrapper">
+          <div className="IconScrollContainer">
+            {repeatIcons(icons).concat(repeatIcons(icons)).map((item, index) =>
+              item.type === "icon" ? (
+                <i key={index} className={`Icon ${item.className}`}></i>
+              ) : (
+                <span key={index} className="IconText">
+                  {item.label}
+                </span>
+              )
+            )}
           </div>
         </div>
 

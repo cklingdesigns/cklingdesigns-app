@@ -39,7 +39,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ show, handleClose }) => {
       )
       .then(
         () => {
-          alert('Message sent!');
+          alert('Message has been sent to Cklingdesigns!');
           setForm({ name: '', email: '', message: '' });
           handleClose();
         },

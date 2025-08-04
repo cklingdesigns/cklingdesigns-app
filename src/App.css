@@ -19,7 +19,7 @@ h2 {
 h3 {
   font-size: 1.2rem;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  border-bottom: 2px solid #6b6b6b;
+  border-bottom: 2px solid #969595;
 }
 a {
   color: #3b738a;
@@ -60,25 +60,35 @@ header {
   justify-content: center;
   background: #1e1e1e;
 }
-.IconScrollContainer {
-  display: flex;
-  justify-content: center;
-  overflow-x: auto;
-  gap: 20px;
-  padding: 20px;
-  scroll-behavior: smooth;
+.IconScrollWrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
   background: #f8f9fa;
   border-radius: 10px;
-  z-index: 1;
-  position: relative;
+  height: 4rem;
 }
-.Icon {
-  font-size: 40px;
-  flex: 0 0 auto;
-  color: #555;
-  transition: transform 0.3s, color 0.3s;
+.IconScrollContainer {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+  margin: 1rem;
 }
+.IconScrollContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.Icon,
 .IconText {
+  white-space: nowrap;
   font-size: 30px;
   flex: 0 0 auto;
   color: #555;
@@ -228,7 +238,13 @@ h1.loading-text {
 .BucketListApp {
   display: flex;
   flex-direction: column;
-  padding: 20px; 
+  padding: 20px;
+  background: #141414;
+  z-index: 200;
+  position: relative;
+}
+.BucketListApp h2 {
+  color: white;
 }
 .BucketListApp div div.card {
   background: #9b9d9e;
