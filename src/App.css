@@ -4,12 +4,19 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-h1 {
-  width: 100%;
-  text-align: center;
-  flex-basis: 100%;
-  margin: 1px;
-  color: #1e1e1e;
+h1.loading-text {
+	place-self: center;
+	background: linear-gradient(90deg, #000, #969595, #0bbaf4) -100%/ 200%;
+	/* being excessively careful with compat, 
+	 * though this has been supported unprefixed and 
+	 * in the shorthand across major browsers for a while */
+	-webkit-background-clip: text;
+	        background-clip: text;
+	/* use color, don't use -webkit-text-fill-color anymore, 
+	 * was meant to solve a problem we haven't had in years */
+	color: transparent;
+	font: 900 clamp(2em, 3vw, 3em) exo, sans-serif;
+	animation: shimmer 2s linear infinite
 }
 h2 {
   font-size: 1.5rem;
@@ -47,7 +54,7 @@ a.nav-link {
 }
 .LowerNav {
   font-size: 1.6rem;
-  font-family: fantasy;
+  font-family: exo, sans-serif;
   color: white;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -244,20 +251,6 @@ section.jumbotron {
   line-height: 1.5;
   margin-top: 20px;
   text-align: justify;
-}
-h1.loading-text {
-	place-self: center;
-	background: linear-gradient(90deg, #000, #969595, #0bbaf4) -100%/ 200%;
-	/* being excessively careful with compat, 
-	 * though this has been supported unprefixed and 
-	 * in the shorthand across major browsers for a while */
-	-webkit-background-clip: text;
-	        background-clip: text;
-	/* use color, don't use -webkit-text-fill-color anymore, 
-	 * was meant to solve a problem we haven't had in years */
-	color: transparent;
-	font: 900 clamp(2em, 3vw, 3em) exo, sans-serif;
-	animation: shimmer 2s linear infinite
 }
 @keyframes dance {
   0%   { transform: translateY(0) rotate(0deg); }
