@@ -42,11 +42,72 @@ a:hover, a:focus {
 .navbar-brand::after, .NoArrow::after {
   content: none !important;
 }
+a.nav-link {
+    text-align: left;
+}
+.LowerNav {
+  font-size: 1.6rem;
+  font-family: fantasy;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: bold;
+  text-align: left;
+  position: relative;
+  margin: 0 2rem 0 0;
+  font-variant-caps: all-small-caps;
+  padding: 0;
+  z-index: 1;
+
+}
+.LowerNav::before {
+  content: "";
+  background-color: #A6A6A6;
+  position: absolute;
+  left: 0;
+  bottom: 9px;
+  width: 100%;
+  height: 5px;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+.LowerNav:hover::before {
+  bottom: 0;
+  height: 100%;
+  z-index: -1;
+}
+.LowerNav:after {
+  content: none;
+}
+/* When navbar is collapsed (mobile view), reset LowerNav to match Nav.Link */
+@media (max-width: 991.98px) {
+  .LowerNav {
+    display: block;
+    padding: 0;
+    font-weight: normal;
+    color: var(--bs-nav-link-color);
+    font-variant-caps: normal;
+    top: 0;
+    text-decoration: none;
+    margin: 0;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1rem;
+  }
+  .LowerNav:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f105"; /* Unicode for angle-right */
+    font-weight: 900; /* Required for solid icons in Free */
+    margin-left: 5px;
+    font-size: .8rem;
+  }
+}
 .fade-in {
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
-
 .fade-in.loaded {
   opacity: 1;
 }
@@ -70,9 +131,9 @@ header {
 }
 .IconScrollContainer {
   display: flex;
-  gap: 20px;
+  gap: 4rem;
   width: max-content;
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 50s linear infinite;
   margin: 1rem;
 }
 .IconScrollContainer::-webkit-scrollbar {
@@ -86,13 +147,21 @@ header {
     transform: translateX(-50%);
   }
 }
-.Icon,
-.IconText {
+.Icon {
   white-space: nowrap;
   font-size: 30px;
   flex: 0 0 auto;
   color: #555;
   top: -5px;
+  position: relative;
+  transition: transform 0.3s, color 0.3s;
+}
+.IconText {
+  white-space: nowrap;
+  font-size: 30px;
+  flex: 0 0 auto;
+  color: #555;
+  top: -10px;
   position: relative;
   transition: transform 0.3s, color 0.3s;
 }
@@ -265,7 +334,7 @@ h1.loading-text {
 }
 @media (min-width: 767.99px) and (max-width: 1200px) {
   .BucketListApp div div.card {
-    width: 47.9%;
+    width: 100%;
     margin: 10px;
   }
 }
@@ -286,20 +355,111 @@ h1.loading-text {
   color: #333;
   text-align: left;
 }
+.BucketListApp li a {
+  display: inline-flex;
+  margin: 0 5px;
+  position: relative;
+  bottom: 3px;
+}
+.BucketListApp li a:hover {
+  text-decoration: none;
+  color: #0bbaf4;
+  transition: color 0.5s ease;
+  transform: scale(1.5);
+}
 .BucketListApp li i {
   padding: 0 5px;
   color: green;
+  font-size: 1.4rem;
 }
-.BucketListApp img {
+.BucketListApp li span {
+  font-size: 1.4rem;
+  position: relative;
+  top: 6px;
+}
+.BucketListApp button img {
   height: 20px;
   object-fit: cover;
   width: 20px;
   border-radius: 3px;
+  border: 1px solid white;
 }
 .BucketListApp li i.fa-square {
   padding: 0 5px;
   color: grey;
 }
+/* Modal overlay - dimmed background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal content - image/video wrapper */
+.modal-content {
+  position: relative;
+  max-width: 50vw; /* up to 95% of viewport width */
+  max-height: 50vh; /* up to 95% of viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button.ModalButton {
+  position: relative;
+  top: -2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.modal-content img,
+.modal-content video {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
 footer {
   position: relative;
   width: 100%;
