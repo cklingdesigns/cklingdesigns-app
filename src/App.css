@@ -234,14 +234,25 @@ header {
   transition: opacity 0.5s ease;
   border-radius: 10px;
 }
+.FortwayneschoolsContainer ul {
+  list-style: none; /* Remove default bullets */
+  padding-left: 1.2rem; /* Space for custom bullets */
+}
+
+.FortwayneschoolsContainer li {
+  position: relative; /* Needed for absolute pseudo-element */
+  margin-bottom: 0.4rem;
+}
+
 .FortwayneschoolsContainer li::before {
-  content: "*";
-  position: absolute;
+  content: "◆"; /* Diamond or "*" */
+  position: relative;
   left: 0;
-  top: 0;
+  top: 0.2em; /* Adjust vertical alignment */
   color: #9b9d9e;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   line-height: 1.2rem;
+  padding-right: .5rem;
 }
 .bg-dark h2 {
   color: #9b9d9e;

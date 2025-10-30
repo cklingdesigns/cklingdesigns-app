@@ -90,9 +90,9 @@ export const ImageSlideshowFunDesigns = () => (
     images={[
       process.env.PUBLIC_URL + '/images/artwork/airbrushed-owl.jpg',
       process.env.PUBLIC_URL + '/images/artwork/airbrushed-wall.jpg',
-      process.env.PUBLIC_URL + '/images/artwork/airbushed-mask.jpg',
+      process.env.PUBLIC_URL + '/images/artwork/airbrushed-mask.jpg',
       process.env.PUBLIC_URL + '/images/artwork/bird-chair.jpg',
-      process.env.PUBLIC_URL + '/images/artwork/airbushed-helmet.jpg',
+      process.env.PUBLIC_URL + '/images/artwork/airbrushed-helmet.jpg',
     ]}
   />
 );
