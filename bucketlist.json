@@ -1,4 +1,5 @@
 [
+    
     {
         "id": 1,
         "category": "Travel",
@@ -400,7 +401,7 @@
         "name": "Swim with Dolphins",
         "completed": false
     },
-    {
+        {
         "id": 66,
         "category": "Adventure",
         "name": "Zip line over city",
@@ -533,8 +534,7 @@
         "category": "Adventure",
         "name": "ATV Rental",
         "completed": true,
-        "url": "/images/adventures/atv.jpg",
-        "video": "/images/adventures/atv.mp4"
+        "url": "/images/adventures/atv.jpg"
     },
     {
         "id": 88,
@@ -757,13 +757,7 @@
         "id": 124,
         "category": "Travel",
         "name": "Florida",
-        "completed": true,
-        "url": "/images/travel/florida1.jpg",
-        "url2": "/images/travel/florida2.jpg",
-        "url3": "/images/travel/florida3.jpg",
-        "url4": "/images/travel/florida4.jpg",
-        "url5": "/images/travel/florida5.jpg",
-        "video": "/images/travel/florida.mp4"
+        "completed": true
     },
     {
         "id": 125,
@@ -874,7 +868,7 @@
         "name": "Indiana",
         "completed": true
     },
-    {
+        {
         "id": 143,
         "category": "Travel",
         "name": "Michigan",
