@@ -22,11 +22,11 @@ h2 {
   font-size: 1.5rem;
   font-family: helvetica;
   font-weight: bold;
+  color: #1e1e1e;
 }
 h3 {
   font-size: 1.2rem;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  border-bottom: 2px solid #969595;
 }
 a {
   color: #3b738a;
@@ -42,6 +42,9 @@ a::after {
   font-weight: 900; /* Required for solid icons in Free */
   margin-left: 5px;
   font-size: .8rem;
+}
+a:has(img)::after {
+  content: none !important;
 }
 a:hover, a:focus {
   color: #3b8a41;
@@ -177,7 +180,7 @@ header {
   color: #0bbaf4;
 }
 .FortwayneschoolsContainer {
-  position:relative;
+  position: relative;
   z-index: 1;
   background: #9b9d9e;
   height: auto;
@@ -197,14 +200,29 @@ header {
   background-color: #fff; /* Optional for visibility */
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.FortwayneschoolsContainer h2, .FortwayneschoolsContainer p {
+.FortwayneschoolsContainer p a {
   margin: 0 0 10px 0;
   text-align: center;
-  color: #333;
+  color: rgb(86, 156, 214);
+}
+.FortwayneschoolsContainer p a:hover {
+  padding: 10px;
+  background: #40474e;
+  border-radius: 10px;
+  color: white;
+}
+.FortwayneschoolsContainer li {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-align: left;
+  font-size: .8rem
+}
+.FortwayneschoolsContainer ul {
+  margin-top: 15px;
 }
 .FortwayneschoolsContainer img {
   width: 100%;
@@ -215,6 +233,28 @@ header {
   object-position: center;
   transition: opacity 0.5s ease;
   border-radius: 10px;
+}
+.FortwayneschoolsContainer li::before {
+  content: "*";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #9b9d9e;
+  font-size: 0.7rem;
+  line-height: 1.2rem;
+}
+.bg-dark h2 {
+  color: #9b9d9e;
+}
+.bg-dark h3 {
+  color: white;
+}
+.album.bg-dark .container {
+  background-color: #40474e;
+  padding: 1rem;
+}
+.bg-dark .container img {
+  padding: 2rem;
 }
 main { 
   width: 100%;

@@ -12,7 +12,11 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, ...props }) => {
 
   return (
     <div ref={ref} style={{ minHeight: '200px' }}>
-      {inView && <img src={src} alt={alt} {...props} />}
+      {inView && (
+        <a href={src} target="_blank" className="no-arrow" rel="noopener noreferrer">
+          <img src={src} alt={alt} {...props} />
+        </a>
+      )}
     </div>
   );
 };
@@ -58,6 +62,7 @@ const ImageSlideshow: React.FC<ImageSlideshowProps> = ({ images, intervalMs = 10
         width: '100%',
         objectFit: 'cover',
         objectPosition: 'center',
+        cursor: 'pointer'
       }}
     >
       <LazyImage
@@ -69,8 +74,7 @@ const ImageSlideshow: React.FC<ImageSlideshowProps> = ({ images, intervalMs = 10
   );
 };
 
-// Now export your specific slideshows using the generic component:
-
+// --- Your exported slideshows ---
 export const ImageSlideshowHobbies = () => (
   <ImageSlideshow
     images={[
@@ -89,16 +93,6 @@ export const ImageSlideshowFunDesigns = () => (
       process.env.PUBLIC_URL + '/images/artwork/airbushed-mask.jpg',
       process.env.PUBLIC_URL + '/images/artwork/bird-chair.jpg',
       process.env.PUBLIC_URL + '/images/artwork/airbushed-helmet.jpg',
-    ]}
-  />
-);
-
-export const ImageSlideshowCoding = () => (
-  <ImageSlideshow
-    images={[
-      process.env.PUBLIC_URL + '/images/coding/fortwayneschools.jpg',
-      process.env.PUBLIC_URL + '/images/coding/myfwcs.jpg',
-      process.env.PUBLIC_URL + '/images/coding/whitehenn-2011.jpg',
     ]}
   />
 );
@@ -141,6 +135,7 @@ export const ImageSlideshowMarketing = () => (
     images={[
       process.env.PUBLIC_URL + '/images/ckling-logo.png',
       process.env.PUBLIC_URL + '/images/myfwcs.png',
+      process.env.PUBLIC_URL + '/images/whitehenn-logo.jpg',
     ]}
   />
 );

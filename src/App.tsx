@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './Pages/Home';
 import Three from './Pages/Three';
+import BucketList from './Pages/BucketList';
 //import CSharp from './Pages/CSharp';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -66,6 +67,7 @@ return (
             <Nav className="justify-content-left m-0">
               <Nav.Link className="LowerNav" as={Link} to="/">Home</Nav.Link>
               <Nav.Link className="LowerNav" as={Link} to="/Three">Three.js</Nav.Link>
+              <Nav.Link className="LowerNav" as={Link} to="/BucketList">JSON Bucket List</Nav.Link>
                {/*<Nav.Link className="LowerNav" as={Link} to="/CSharp">C#</Nav.Link>*/}
             </Nav>
           </div>
@@ -76,6 +78,7 @@ return (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Three" element={<Three />} />
+        <Route path="/BucketList" element={<BucketList />} />
         {/*<Route path="/cklingdesigns-app/CSharp" element={<CSharp />} />*/}
       </Routes>
     <ContactModal show={showModal} handleClose={() => setShowModal(false)} />
